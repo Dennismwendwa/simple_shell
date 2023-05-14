@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 
 /**
  * signal_handle - It handles ^C
