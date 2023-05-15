@@ -18,7 +18,7 @@
 
 
 #define PRINTING(p) (write(STDOUT_FILENO, P, own_strlen(p)))
-
+#define BUFSIZE 1024
 #define PATH_MAXIMUM 1024
 
 /**
