@@ -21,6 +21,17 @@
 
 #define PATH_MAXIMUM 1024
 
+/**
+ * struct builtin - Has builtin to handle
+ * @command: Pointer to char
+ * @fun: function to execute
+ */
+
+typedef struct builtin
+{
+	char *command;
+	int (*fun)(char **buffer, int err);
+} build_t;
 
 /***** FUNCTIONS FOUND IN FILE buildin.c *****/
 void exit_buildin(char **cmd, char *inputi, char **argv, int k);
@@ -79,34 +90,29 @@ char *building(char *words, char *volum);
 void printing_error(char *command, int cntr, char **argv);
 void fun_prompt(void);
 
+/***** FUNCTIONS FOUND IN FILE shell.c *****/
+int main(__attribute__((unused)) int arg_cnt, char **arg_v);
+void env_create(char **envi);
+int builtin_check(char **cmd);
 
+/***** FUNCTIONS FOUND IN FILE exe.c *****/
+void signal_handle(int sig_n);
+int builtin_handle(char **cmd, int ere);
+int cmd_check(char *buffer, char **cmd, int tc, char **arg_v);
 
+/***** FUNCTIONS FOUND IN FILE exe_file.c *****/
+void file_treat(char *buffer, int count, FILE *fp, char **arg_v);
+void file_exit_bul(char **cmd, char *buffer, FILE *fil_d);
+void file_read(char *filename, char **arg_v);
 
+/***** FUNCTIONS FOUND IN FILE hist.c *****/
+void envi_free(char **envi);
+int buf_history(char *buffer);
 
+/***** FUNCTIONS FOUND IN FILE out_put.c *****/
+void printing_error(char **arg_v, int cnt, char **cmd);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/***** FUNCTIONS FOUND IN FILE parser.c *****/
+char **cmd_parse(char *buffer);
 
 #endif
