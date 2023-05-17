@@ -69,11 +69,11 @@ int cmd_check(char **cmd, char *buffer, int tc, char **arg_v)
 	{
 		if (own_strncmp(*cmd, "./", 2) != 0 && own_strncmp(*cmd, "/", 1) != 0)
 		{
-			cmd_path(cmd);
+			pathh_cmd(cmd);
 		}
 		if (execve(*cmd, cmd, environ) == -1)
 		{
-			error_print(cmd[0], tc, arg_v);
+			printing_error(cmd[0], tc, arg_v);
 			free(buffer);
 			free(cmd);
 			exit(EXIT_FAILURE);

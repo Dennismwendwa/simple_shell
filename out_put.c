@@ -14,11 +14,11 @@ void print_error(char **arg_v, int cnt, char **cmd)
 
 	PRINTING(arg_v[0]);
 	PRINTING(": ");
-	PRINTING(err);
+	PRINTING(er);
 	PRINTING(": ");
 	PRINTING(cmd[0]);
 	PRINTING(": Illegal number: ");
 	PRINTING(cmd[1]);
 	PRINTING("\n");
-	free(err);
+	free(er);
 }

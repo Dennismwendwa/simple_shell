@@ -25,9 +25,12 @@ int own_strlen(char *x)
 
 int own_atoi(char *x)
 {
-	int a = c = 0;
+	int c;
+	int a;
 	int b;
 	int d = 1;
+
+	a = c = 0;
 
 	while ((x[a] < '0' || x[a] > '9') && (x[a] != '\0'))
 	{
@@ -82,7 +85,7 @@ char *own_strncpy(char *kwenda, char *kbq, int l)
 		k++;
 	}
 
-	while (k < n)
+	while (k < l)
 	{
 		*(kwenda + k) = '\0';
 		k++;
