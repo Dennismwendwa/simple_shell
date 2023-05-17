@@ -9,9 +9,9 @@
 char *get_line()
 {
 	char k = 0;
+	int buffersize = BUFFERSIZE, readd;
 	char *buffer = malloc(buffersize);
 	int j;
-	int buffersize = BUFFERSIZE, readd;
 
 	if (buffer == NULL)
 	{

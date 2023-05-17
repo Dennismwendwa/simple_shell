@@ -102,7 +102,7 @@ char *building(char *words, char *volum)
 	if (kbq == NULL)
 		return (NULL);
 
-	memoryset(kbq, 0, length);
+	memset(kbq, 0, length);
 
 	kbq = own_strcat(kbq, volum);
 	kbq = own_strcat(kbq, "/");

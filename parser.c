@@ -9,7 +9,7 @@
 char **cmd_parse(char *buffer)
 {
 	int j = 0;
-	int buf_size = BUFSIZE;
+	int buf_size = BUFFERSIZE;
 	char **toks;
 	char *tok;
 

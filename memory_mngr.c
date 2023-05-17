@@ -37,7 +37,7 @@ void *_kalloc(unsigned int s)
   * Return:- Always 0
   */
 
-void *filling_array(void *kim, int num, unsigned int size)
+void *filling_array(void *y, int num, unsigned int size)
 {
 	unsigned int j = 0;
 	char *z = y;
@@ -62,12 +62,14 @@ void *filling_array(void *kim, int num, unsigned int size)
   * Return:- Always 0
   */
 
-char memorycpy(char *dst, char *source, unsigned int k)
+char *memorycpy(char *dst, char *source, unsigned int k)
 {
 	unsigned int j = 0;
 
 	for (; j < k; j++)
+	{
 		dst[j] = source[j];
+	}
 
 	return (dst);
 }
@@ -96,7 +98,7 @@ void freeing_all(char **kbq, char *linne)
   * Return:- Always 0
   */
 
-void _reallocc(void *pointer, unsigned int oldersize, unsigned int newersize)
+void *_reallocc(void *pointer, unsigned int oldersize, unsigned int newersize)
 {
 	void *outcome;
 
@@ -110,7 +112,7 @@ void _reallocc(void *pointer, unsigned int oldersize, unsigned int newersize)
 		free(pointer);
 		return (NULL);
 	}
-	outcome = malloc(newwersize);
+	outcome = malloc(newersize);
 	if (outcome == NULL)
 	{
 		return (NULL);
@@ -125,4 +127,5 @@ void _reallocc(void *pointer, unsigned int oldersize, unsigned int newersize)
 		memorycpy(outcome, pointer, oldersize);
 		free(pointer);
 	}
+	return (outcome);
 }
