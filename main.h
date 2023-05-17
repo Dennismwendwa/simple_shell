@@ -18,7 +18,7 @@
 
 
 #define PRINTING(p) (write(STDOUT_FILENO, p, own_strlen(p)))
-#define BUFSIZE 1024
+#define BUFFERSIZE 1024
 #define PATH_MAXIMUM 1024
 
 /**
@@ -60,9 +60,9 @@ void hundle_hashtag(char *buffer);
 /***** FUNCTIONS FOUND IN FILE memory_mngr.c *****/
 void *_kalloc(unsigned int s);
 void *filling_array(void *kim, int num, unsigned int size);
-char memorycpy(char *dst, char *source, unsigned int k);
+char *memorycpy(char *dst, char *source, unsigned int k);
 void freeing_all(char **kbq, char *linne);
-void _reallocc(void *pointer, unsigned int oldersize, unsigned int newersize);
+void *_reallocc(void *pointer, unsigned int oldersize, unsigned int newersize);
 
 
 /***** FUNCTIONS FOUND IN FILE number_prnt.c *****/
@@ -121,5 +121,15 @@ void print_error(char **arg_v, int cnt, char **cmd);
 
 /***** FUNCTIONS FOUND IN FILE parser.c *****/
 char **cmd_parse(char *buffer);
+
+
+/***** FUNCTIONS FOUND IN FILE function_more.c  ****/
+char *own_strcpy(char *det, char *sorce);
+char *own_strchr(char *h, char k);
+char *own_strcat(char *det, char *sorce);
+int own_strncmp(const char *a, const char *b, size_t k);
+char *own_strdup(char *string);
+
+
 
 #endif
