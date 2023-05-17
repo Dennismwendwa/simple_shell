@@ -35,7 +35,7 @@ int buf_history(char *buffer)
 	{
 		while (buffer[length])
 			length++;
-		w = write(fd, buffer, len);
+		w = write(fd, buffer, length);
 		if (w < 0)
 			return (-1);
 	}

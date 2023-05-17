@@ -33,6 +33,6 @@ void printing_error(char *command, int cntr, char **argv)
 
 void fun_prompt(void)
 {
-	PRINTTING("$ ");
+	PRINTING("$ ");
 
 }

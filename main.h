@@ -17,7 +17,7 @@
 #include <signal.h>
 
 
-#define PRINTING(p) (write(STDOUT_FILENO, P, own_strlen(p)))
+#define PRINTING(p) (write(STDOUT_FILENO, p, own_strlen(p)))
 #define BUFSIZE 1024
 #define PATH_MAXIMUM 1024
 
@@ -33,9 +33,12 @@ typedef struct builtin
 	int (*fun)(char **buffer, int err);
 } build_t;
 
+/****Global variable***/
+extern char **environ;
+
 /***** FUNCTIONS FOUND IN FILE buildin.c *****/
 void exit_buildin(char **cmd, char *inputi, char **argv, int k);
-int display_env(__attribute__((unused)) char **cmd, __attribute__((unused)) int print);
+int disen(__attribute__((unused)) char **cmd, __attribute__((unused)) int prt);
 int dir_change(char **cmd, __attribute__((unused))int print);
 int bul_echo(char **cmd, int start);
 int help_display(char **cmd, __attribute__((unused)) int print);
@@ -85,6 +88,10 @@ char *_getenv(char *nickname);
 int pathh_cmd(char **input);
 char *building(char *words, char *volum);
 
+/***** FUNCTIONS FOUND IN FILE bul_more.c *****/
+int echo_print(char **cmd);
+int disp_hist(__attribute__((unused))char **cm, __attribute__((unused))int s);
+
 
 /***** FUNCTIONS FOUND IN FILE pet_fun.c *****/
 void printing_error(char *command, int cntr, char **argv);
@@ -98,7 +105,7 @@ int builtin_check(char **cmd);
 /***** FUNCTIONS FOUND IN FILE exe.c *****/
 void signal_handle(int sig_n);
 int builtin_handle(char **cmd, int ere);
-int cmd_check(char *buffer, char **cmd, int tc, char **arg_v);
+int cmd_check(char **cmd, char *buffer, int tc, char **arg_v);
 
 /***** FUNCTIONS FOUND IN FILE exe_file.c *****/
 void file_treat(char *buffer, int count, FILE *fp, char **arg_v);
@@ -110,7 +117,7 @@ void envi_free(char **envi);
 int buf_history(char *buffer);
 
 /***** FUNCTIONS FOUND IN FILE out_put.c *****/
-void printing_error(char **arg_v, int cnt, char **cmd);
+void print_error(char **arg_v, int cnt, char **cmd);
 
 /***** FUNCTIONS FOUND IN FILE parser.c *****/
 char **cmd_parse(char *buffer);
