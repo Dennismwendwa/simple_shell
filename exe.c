@@ -7,9 +7,9 @@
  */
 void signal_handle(int sig_n)
 {
-	if (sig == SIGINT)
+	if (sig_n == SIGINT)
 	{
-		PRINTER("\n$ ");
+		PRINTING("\n$ ");
 	}
 }
 
@@ -21,12 +21,12 @@ void signal_handle(int sig_n)
  */
 int builtin_handle(char **cmd, int ere)
 {
-	built_t bil[] = {
+	build_t bil[] = {
 		{"cd", dir_change},
-		{"env", display_env},
+		{"env", disen},
 		{"echo", bul_echo},
 		{"help", help_display},
-		{"history", dis_history},
+		{"history", disp_hist},
 		{NULL, NULL}
 	};
 	int j = 0;
@@ -50,7 +50,7 @@ int builtin_handle(char **cmd, int ere)
  * @arg_v: argument name
  * Return: 1 case comm Null -1, wrong 0
  */
-int cmd_check(char *buffer, char **cmd, int tc, char **arg_v)
+int cmd_check(char **cmd, char *buffer, int tc, char **arg_v)
 {
 	pid_t pid;
 	int status;

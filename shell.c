@@ -20,7 +20,7 @@ int main(__attribute__((unused)) int arg_cnt, char **arg_v)
 	{
 		count++;
 		if (isatty(STDIN_FILENO))
-			prompt();
+			fun_prompt();
 		buffer = get_line();
 		if (buffer[0] == '\0')
 		{
@@ -30,19 +30,19 @@ int main(__attribute__((unused)) int arg_cnt, char **arg_v)
 		cmd = cmd_parse(buffer);
 		if (own_strcmp(cmd[0], "exit") == 0)
 		{
-			exit_builtin(cmd, buffer, arg_v, count);
+			exit_buildin(cmd, buffer, arg_v, count);
 		}
 		else if (builtin_check(cmd) == 0)
 		{
 			str = builtin_handle(cmd, str);
-			free_all(cmd, buffer);
+			freeing_all(cmd, buffer);
 			continue;
 		}
 		else
 		{
 			str = cmd_check(cmd, buffer, count, arg_v);
 		}
-		free_all(cmd, buffer);
+		freeing_all(cmd, buffer);
 	}
 	return (1);
 }
@@ -54,7 +54,7 @@ int main(__attribute__((unused)) int arg_cnt, char **arg_v)
  */
 void env_create(char **envi)
 {
-	int j;
+	int j = 0;
 
 	while (environ[j])
 	{
