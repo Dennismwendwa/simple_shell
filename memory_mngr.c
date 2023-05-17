@@ -33,7 +33,7 @@ void *_kalloc(unsigned int s)
   * filling_array - fills arrys with const bytes
   * @size:- size of number
   * @num:- the number
-  * @kim:- pointer
+  * @y:- pointer
   * Return:- Always 0
   */
 
