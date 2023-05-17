@@ -56,13 +56,13 @@ int disp_hist(__attribute__((unused))char **cm, __attribute__((unused))int s)
 	{
 		count++;
 		err = own_itoa(count);
-		PRINTER(err);
+		PRINTING(err);
 		free(err);
-		PRINTER(" ");
-		PRINTER(buffer);
+		PRINTING(" ");
+		PRINTING(buffer);
 	}
 	if (buffer)
-		free(line);
+		free(buffer);
 	fclose(fp);
 	return (0);
 }

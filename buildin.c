@@ -24,14 +24,14 @@ void exit_buildin(char **cmd, char *inputi, char **argv, int k)
 
 	while (cmd[1][m])
 	{
-		if (_isalpha(cmd[1][m++]) != 0)
+		if (own_isalpha(cmd[1][m++]) != 0)
 		{
-			_prerror(argv, k, cmd);
+			print_error(argv, k, cmd);
 			break;
 		}
 		else
 		{
-			stat = _own_atoi(cmd[1]);
+			stat = own_atoi(cmd[1]);
 			free(inputi);
 			free(cmd);
 			exit(stat);
@@ -40,21 +40,20 @@ void exit_buildin(char **cmd, char *inputi, char **argv, int k)
 }
 
 /**
-  * display_env - shows variables of env
+  * disen - shows variables of env
   * @cmd:- command to exucute
-  * @print:- command excuted last status
+  * @prt:- command excuted last status
   * Return:- Always 0
   */
 
-int display_env(__attribute__((unused)) char **cmd,
-		__attribute__((unused)) int print)
+int disen(__attribute__((unused)) char **cmd, __attribute__((unused)) int prt)
 {
 	int length;
 	size_t l = 0;
 
-	for (; environ[l] != NULL, l++)
+	for (; environ[l] != NULL; l++)
 	{
-		length(environ[l]);
+		length = own_strlen(environ[l]);
 		write(1, environ[l], length);
 		write(STDOUT_FILENO, "\n", 1);
 	}
@@ -122,24 +121,24 @@ int bul_echo(char **cmd, int start)
 
 	if (own_strncmp(cmd[1], "$$", 2) == 0)
 	{
-		printing_number(pid_num);
-		PRINTR("\n");
+		numberin_print(pid_num);
+		PRINTING("\n");
 	}
 	else if (own_strncmp(cmd[1], "$?", 2) == 0)
 	{
-		printing_number(start);
-		PRINTR("\n");
+		num_print(start);
+		PRINTING("\n");
 	}
 	else if (own_strncmp(cmd[1], "$PATH", 5) == 0)
 	{
 		pathh = _getenv("PATH");
-		PRINTR(pathh);
-		PRINTR("\n");
+		PRINTING(pathh);
+		PRINTING("\n");
 		free(pathh);
 	}
 	else
 	{
-		return (printing_echo(cmd));
+		return (echo_print(cmd));
 	}
 
 	return (1);
@@ -158,7 +157,7 @@ int help_display(char **cmd, __attribute__((unused)) int print)
 	char k;
 	int kl;
 	int ky;
-	int read = 1;
+	int red = 1;
 
 	kl = open(cmd[1], O_RDONLY);
 	if (kl < 0)
@@ -168,10 +167,10 @@ int help_display(char **cmd, __attribute__((unused)) int print)
 	}
 
 
-	while (read > 0)
+	while (red > 0)
 	{
-		read = (kl, &k, 1);
-		ky = write(STDOUT_FILENO, &k, read);
+		red = read(kl, &k, 1);
+		ky = write(STDOUT_FILENO, &k, red);
 
 		if (ky < 0)
 			return (-1);
