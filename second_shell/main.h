@@ -44,4 +44,19 @@ int own_strncmp(char *stringone, char *stringtwo, int length);
 int own_strcmp(char *stringone, char *stringtwo);
 
 
+
+
+
+/**
+  * struct fmt - furnction data
+  * @ltr: data type
+  * @type: ptr of func type
+  */
+
+typedef struct fmt
+{
+	char *ltr;
+	int (*type)();
+} fmt;
+
 #endif
