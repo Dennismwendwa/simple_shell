@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * exec - functin=on that executes new processes
+ * exe - functin=on that executes new processes
  * @buffer: user input
  * @dpl: line duplicate
  * @ar: array to be handled by execve
@@ -10,7 +10,7 @@
  * @fcnt: number of commands that have failed
  * Return: 0 for success
  */
-int exec(char *buffer, char **ar, char *dpl, char **tok, char **argv, int fcnt)
+int exe(char *buffer, char **ar, char *dpl, char **tok, char **argv, int fcnt)
 {
 	int status, ownpath = -1;
 	pid_t child;

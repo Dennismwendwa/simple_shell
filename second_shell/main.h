@@ -44,7 +44,25 @@ int own_strncmp(char *stringone, char *stringtwo, int length);
 int own_strcmp(char *stringone, char *stringtwo);
 
 
+/***** FUNCTIONS FROM FILE exe.c *****/
+int exe(char *buffer, char **ar, char *dpl, char **tok, char **argv, int fcnt);
 
+
+/***** FUNCTIONS FROM FILE print.c *****/
+int check_format(va_list *arg_p, const char *format, int j);
+void get_digit(int m);
+int print_f(const char *format, ...);
+int print_digit(va_list *arg_s);
+
+
+/***** FUNCTIONS FROM FILE path_func.c *****/
+int find_path(char **toks);
+char *own_strcpy(char *dest, char *src);
+void path_exe(char *p, char **toks);
+int path_search(char *p, char **toks);
+
+/***** FUNCTIONS FROM FILE shell.c *****/
+int main(int arg_c, char *arg_v[]);
 
 
 /**
