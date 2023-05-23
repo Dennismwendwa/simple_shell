@@ -7,7 +7,7 @@
  * @j: the location of the modifier
  * Return: count
  */
-int check_format(va_list *arp_p, const char *fomat, int j)
+int check_format(va_list *arg_p, const char *format, int j)
 {
 	int n = 0;
 	int x = 0;

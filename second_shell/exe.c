@@ -3,9 +3,9 @@
 /**
  * exec - functin=on that executes new processes
  * @buffer: user input
- * @dupl: line duplicate
+ * @dpl: line duplicate
  * @ar: array to be handled by execve
- * @arg_v: arguments
+ * @argv: arguments
  * @tok: Tokens to check
  * @fcnt: number of commands that have failed
  * Return: 0 for success
