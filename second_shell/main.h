@@ -20,8 +20,28 @@
 extern char **environ;
 
 
+/***** FUNCTIONS FROM FILE built.c *****/
+int checkbuilt(char *lin, char **arrs, char *nwlin, char **arry_token);
+void changing_dir(char **arrs);
 
 
+/***** FUNCTIONS FROM FILE more_str.c *****/
+int _putchar(char c);
+int prstring(va_list *args);
+void _putts(char *string);
+
+
+/***** FUNCTIONS FROM FILE persing.c ****/
+void mine_free(char *lin, char **arrs, char *nwlin, char **arry);
+int parsing(char *lin, int number_tok, char **argv, int coutcmd);
+
+
+/***** FUNCTIONS FROM FILE str_tools.c *****/
+char *own_strdup(char *string);
+int number_count(char *lin);
+char *own_strcat(char *dst, char *source);
+int own_strncmp(char *stringone, char *stringtwo, int length);
+int own_strcmp(char *stringone, char *stringtwo);
 
 
 #endif
