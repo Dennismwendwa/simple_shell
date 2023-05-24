@@ -39,7 +39,7 @@ char *tar_get(char *var_name)
 int cd_user(char *argv)
 {
 	char *userdir = NULL;
-	size_t user_len = _strlen(argv);
+	size_t user_len = own_strlen(argv);
 
 	userdir = alloc_mngr(userdir, (sizeof(char) * (6 + user_len)));
 	if (!userdir)
@@ -119,7 +119,7 @@ int set_OLDPWD(void)
 	pwd_len = own_strlen(pwd);
 	for (i = 0; environ[i]; i++)
 	{
-		if ((_strncmp(owd_ref, environ[i], 7)) == 0)
+		if ((own_strncmp(owd_ref, environ[i], 7)) == 0)
 		{
 			environ[i] = own_realloc(update, (sizeof(char) * (7 + pwd_len + 1)));
 			if (!environ[i])

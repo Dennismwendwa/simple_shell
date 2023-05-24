@@ -15,8 +15,8 @@ int bltin_exit(char *const *argv)
 
 	if (argv[1] == NULL)
 	{
-		free_memlst(&mem_head);
-		free_static_memlst(&static_mem_head);
+		freeing_memlst(&mem_head);
+		freeing_static_memlst(&static_mem_head);
 		exit(EXIT_SUCCESS);
 	}
 	else
@@ -28,8 +28,8 @@ int bltin_exit(char *const *argv)
 			case (-1):
 				return (EXIT_FAILURE);
 			default:
-				free_memlst(&mem_head);
-				free_static_memlst(&static_mem_head);
+				freeing_memlst(&mem_head);
+				freeing_static_memlst(&static_mem_head);
 				exit(ans);
 		}
 	}
