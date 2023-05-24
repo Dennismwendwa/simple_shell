@@ -2,7 +2,7 @@
 #include "main.h"
 
 /**
-  * _getline - function that read commds
+  * getline - function that read commds
   * @buf:- pointer to commands
   * Return:- Always 0
   */
