@@ -44,15 +44,15 @@ int dir_change(char *const *argv)
 	}
 	else if (!(own_strcmp(argv[1], "..")))
 	{
-		if (cd_parent())
+		if (parent_cd())
 			return (-1);
 	}
 	else if (!(own_strcmp(argv[1], "-")))
 	{
-		if (cd_previous())
+		if (cd_prev())
 			return (-1);
 	}
-	else if ((!(_strncmp(argv[1], "~", 1)) && (argv[1][1] != '\0')))
+	else if ((!(own_strncmp(argv[1], "~", 1)) && (argv[1][1] != '\0')))
 	{
 		if (cd_user(argv[1]))
 			return (-1);
@@ -73,13 +73,13 @@ int cd_cur(void)
 {
 	char *dirtag = NULL;
 
-	dirtag = target_get("PWD=");
+	dirtag = tar_get("PWD=");
 
 	if (dirtag)
 	{
 		int chdir_result = chdir(dirtag);
 
-		if (chd_result == 0)
+		if (chdir_result == 0)
 		{
 			set_OLDPWD();
 			set_PWD(dirtag);
@@ -136,23 +136,23 @@ int cd_prev(void)
  */
 int parent_cd(void)
 {
-	char dirtar[1024];
+	char *dirtar = NULL;
 	char *l_slash;
 	size_t i;
 
-	dirtar = target_get("PWD=");
+	dirtar = tar_get("PWD=");
 	if (dirtar)
 	{
 		l_slash = strrchr(dirtar, '/');
 		if (l_slash)
 		{
 			for (i = strlen(dirtar); &dirtar[i] != l_slash; i--)
-				dirtar[i];
+				dirtar[i] = '\0';
 
 			if (chdir(dirtar) == 0)
 			{
 				set_OLDPWD();
-				set_PWD(target_dir);
+				set_PWD(dirtar);
 				return (0);
 			}
 		}
