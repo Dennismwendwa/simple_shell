@@ -75,6 +75,7 @@ ssize_t get_line(char **buf);
 void shfting_buffer(char *memory, ssize_t l);
 int allocating_mem(char *memory);
 ssize_t buff_copy(char **dst, char *source, ssize_t *start);
+char *alloc_mngr(char *pointer, size_t siz);
 
 
 /***** FUNCTIONS FOUND IN FILE own_strtoken.c *****/
@@ -121,7 +122,7 @@ int bltin_env(char *const *argv);
 /***** FUNCTIONS FOUND IN FILE parser.c *****/
 char *reverse_string(char *str);
 void freeing_static_memlst(mem_list **head);
-
+void freeing_memlst(mem_list **head);
 
 /***** FUNCTIONS FOUND IN FILE function_more.c *****/
 char *own_strncpy(char *destination, const char *source, size_t count);
@@ -129,7 +130,6 @@ size_t own_strlen(char *string);
 int own_strcmp(char *string1, char *string2);
 int own_strncmp(char *string1, char *string2, size_t num);
 char *own_strcat(char *destination, char *source);
-
 
 
 #endif

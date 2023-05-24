@@ -141,8 +141,8 @@ size_t length_path(char *pat_pointer)
   * Return:- Always 0
   */
 
-
-char *_getenv(char *nickname) /* not in use */
+/*
+char *_getenv(char *nickname)  not in use 
 {
 	int a, b, c;
 	char *volum;
@@ -176,14 +176,14 @@ char *_getenv(char *nickname) /* not in use */
 
 	}
 	return (NULL);
-}
+}*/
 
 /**
   * pathh_cmd - search for commands
   * @input:- command to excute
   * Return:- Always 0
   */
-
+/*
 
 int pathh_cmd(char **input)
 {
@@ -228,4 +228,4 @@ int pathh_cmd(char **input)
 	kbq = own_strcat(kbq, words);
 
 	return (kbq);
-}
+}*/

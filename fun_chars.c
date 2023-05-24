@@ -6,7 +6,7 @@
   * @x:- pointer to the string
   * Return:- Always 0
   */
-
+/*
 int own_strlen(char *x)
 {
 	int g = 0;
@@ -15,14 +15,14 @@ int own_strlen(char *x)
 		continue;
 
 	return (g);
-}
+}*/
 
 /**
   * own_atoi - changes to number
   * @x:- the string to chane
   * Return:- Always 0
   */
-
+/*
 int own_atoi(char *x)
 {
 	int c;
@@ -50,7 +50,7 @@ int own_atoi(char *x)
 	}
 
 	return (c);
-}
+}*/
 
 
 
@@ -74,7 +74,7 @@ int _putchar(char k)
   * @kwenda:- new string
   * Return:- Always 0
   */
-
+/*
 char *own_strncpy(char *kwenda, char *kbq, int l)
 {
 	int k = 0;
@@ -94,13 +94,13 @@ char *own_strncpy(char *kwenda, char *kbq, int l)
 
 	return (kwenda);
 }
-
+*/
 /**
   * _putts - function that prints strs
   * @kbq:- pointer to the strng
   * Return:- Always 0
   */
-
+/*
 void _putts(char *kbq)
 {
 	int j = 0;
@@ -112,4 +112,4 @@ void _putts(char *kbq)
 
 	return;
 
-}
+}*/

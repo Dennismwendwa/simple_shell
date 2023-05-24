@@ -23,7 +23,7 @@ ssize_t get_line(char **buf)
 
 			sum = sum + cnt;
 			lin[cnt] = '\0';
-			copy = buff_copy(&(*buf), lin, &begin);
+			copy = buff_copy(&(*buf), lin, &start);
 			if (copy < cnt)
 			{
 				start = 0;
@@ -33,7 +33,7 @@ ssize_t get_line(char **buf)
 	}
 
 	else
-		copy = (buff_copy(&(*buf), lin, &begin) + 1);
+		copy = (buff_copy(&(*buf), lin, &start) + 1);
 
 	return (sum);
 }
@@ -101,17 +101,17 @@ ssize_t buff_copy(char **dst, char *source, ssize_t *start)
 
 	if (source[k] == '\n')
 	{
-		*dst = manenger_allc(*dst, (sizeof(char) * (cnt_copy + *start + 1)));
+		*dst = alloc_mngr(*dst, (sizeof(char) * (cnt_copy + *start + 1)));
 		if (!(*dst))
 			return (-1);
 		own_strncpy((*dst + *start), source, cnt_copy);
-		shift_buffer(source, (cnt_copy + 1));
+		shfting_buffer(source, (cnt_copy + 1));
 		return (cnt_copy);
 	}
 
 	if (source[k] == '\0')
 	{
-		*dst = manenger_allc(*dst, (sizeof(char) * (cnt_copy)));
+		*dst = alloc_mngr(*dst, (sizeof(char) * (cnt_copy)));
 		if (!(*dst))
 			return (1);
 		own_strncpy((*dst + *start), source, (cnt_copy));
@@ -171,7 +171,7 @@ ssize_t buff_copy(char **dst, char *source, ssize_t *start)
   * Return:- Always 0
   */
 
-char *get_line() /* not in use */
+/*char *get_line()* not in use *
 {
 	char k = 0;
 	int buffersize = BUFFERSIZE, readd;
@@ -224,4 +224,4 @@ char *get_line() /* not in use */
 		}
 	}
 }
-
+*/
