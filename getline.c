@@ -9,7 +9,7 @@
 
 ssize_t get_line(char **buf)
 {
-	static char lin[MAX_TTAL_ ARGS];
+	static char lin[MAX_TTAL_ARGS];
 	static ssize_t sum;
 	ssize_t start = 0;
 	ssize_t copy = 0, cnt = 0;
