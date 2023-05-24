@@ -43,44 +43,6 @@ int own_intlen(int number)
 }
 
 
-
-/**
-  * own_itoa - function that changes ints to chars
-  * @l:- the int to change
-  * Return:- Always 0
-  */
-
-char *own_itoa(unsigned int l)
-{
-	char *m;
-	int j = 0;
-	int length = 0;
-
-	length = own_intlen(l);
-	m = malloc(length + 1);
-
-	if (!m)
-	{
-		return (NULL);
-	}
-
-	*m = '\0';
-
-	while (l / 10)
-	{
-		m[j] = (l % 10) + '0';
-		l /= 10;
-		j++;
-	}
-
-	m[j] = (l % 10) + '0';
-	rev_arry(m, length);
-	m[j + 1] = '\0';
-
-
-	return (m);
-}
-
 /**
   * own_isalpha - function that checks if char is alpha
   * @f:- the char to check
@@ -94,46 +56,4 @@ int own_isalpha(int f)
 
 	else
 		return (0);
-}
-
-/**
-  * own_strcmp - fuction that cmp two str
-  * @sizeone:- first str
-  * @sizetwo:- secomd str
-  * Return:- Always 0
-  */
-
-int own_strcmp(char *sizeone, char *sizetwo)
-{
-	int lengthone = own_strlen(sizeone);
-	int lengthtwo = own_strlen(sizetwo);
-	int comp = 0;
-	int j = 0;
-
-
-	if (sizeone == NULL || sizetwo == NULL)
-	{
-		return (1);
-	}
-
-	if (lengthone != lengthtwo)
-	{
-		return (1);
-	}
-
-	for (; sizeone[j]; j++)
-	{
-		if (sizeone[j] != sizetwo[j])
-		{
-			comp = sizeone[j] - sizetwo[j];
-			break;
-		}
-		else
-		{
-			continue;
-		}
-	}
-
-
-	return (comp);
 }

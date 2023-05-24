@@ -25,14 +25,14 @@ char **getting_pathh(char *const *argv)
 
 			for (p_j = 0; p_j < pat_count; p_j++)
 			{
-				pat_ctsiz = (path_len(pat_pointer) + own_strlen(argv[0]) + 2);
+				pat_ctsiz = (length_path(pat_pointer) + own_strlen(argv[0]) + 2);
 				pat[p_j] = alloc_mngr(pat[p_j], (sizeof(char) * pat_ctsiz));
 
-				own_strncpy(pat[p_j], pat_pointer, path_len(pat_pointer));
+				own_strncpy(pat[p_j], pat_pointer, length_path(pat_pointer));
 				own_strcat(pat[p_j], "/");
 				own_strcat(pat[p_j], argv[0]);
 
-				pat_pointer = (pat_pointer + (path_len(pat_pointer) + 1));
+				pat_pointer = (pat_pointer + (length_path(pat_pointer) + 1));
 			}
 			pat[p_j] = NULL;
 			return (pat);
@@ -114,118 +114,3 @@ size_t length_path(char *pat_pointer)
 
 	return (j);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
-  * _getenv - finds the variable of env
-  * @nickname:- name of the env
-  * Return:- Always 0
-  */
-
-/*
-char *_getenv(char *nickname)  not in use 
-{
-	int a, b, c;
-	char *volum;
-	size_t number, value1;
-
-
-	number = own_strlen(nickname);
-	for (a = 0; environ[a]; a++)
-	{
-		if (own_strncmp(nickname, environ[a], number) == 0)
-		{
-			value1 = own_strlen(environ[a]) - number;
-			volum = malloc(sizeof(char) * value1);
-
-
-			if (!volum)
-			{
-				free(volum);
-				perror("alloc failed");
-				return (NULL);
-			}
-
-			c = 0;
-			for (b = number + 1; environ[a][b]; b++, c++)
-				volum[c] = environ[a][b];
-
-			volum[c] = '\0';
-			return (volum);
-		}
-
-
-	}
-	return (NULL);
-}*/
-
-/**
-  * pathh_cmd - search for commands
-  * @input:- command to excute
-  * Return:- Always 0
-  */
-/*
-
-int pathh_cmd(char **input)
-{
-	struct stat buff;
-	char *way;
-	char *volum;
-	char *input_pathh;
-
-	way = _getenv("PATH");
-	volum = own_strtok(way, ":");
-
-	while (volum != NULL)
-	{
-		input_pathh = building(*input, volum);
-		if (stat(input_pathh, &buff) == 0)
-		{
-			*input = own_strdup(input_pathh);
-			free(input_pathh);
-			free(way);
-			return (0);
-		}
-
-		free(input_pathh);
-		volum = own_strtok(NULL, ":");
-
-	}
-
-	size_t length;
-	char *kbq;
-
-	length = own_strlen(volum) + own_strlen(words) + 2;
-
-	kbq = malloc(sizeof(char) * length);
-
-	if (kbq == NULL)
-		return (NULL);
-
-	memset(kbq, 0, length);
-
-	kbq = own_strcat(kbq, volum);
-	kbq = own_strcat(kbq, "/");
-	kbq = own_strcat(kbq, words);
-
-	return (kbq);
-}*/
