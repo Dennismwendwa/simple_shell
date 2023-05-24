@@ -139,7 +139,7 @@ char *own_itoa(size_t num, char *buff, int ba)
  * @cmd: Command parsed
  * Return: Success 0, Fail -1
  */
-int echo_print(char **cmd) /* not in use */
+/*int echo_print(char **cmd)*/
 {
 	int status;
 	pid_t pid;
@@ -190,8 +190,8 @@ int disp_hist(__attribute__((unused))char **cm, __attribute__((unused))int s)
 	while ((getline(&buffer, &length, fp)) != -1)
 	{
 		count++;
-		err = own_itoa(count);
-		PRINTING(err);
+		err = itoa(count);
+		PRINT_ING(err);
 		free(err);
 		PRINTING(" ");
 		PRINTING(buffer);
