@@ -9,126 +9,126 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include <linux/limits.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <signal.h>
+#include <stdarg.h>
+#include <limits.h>
 
 
-#define PRINTING(p) (write(STDOUT_FILENO, p, own_strlen(p)))
-#define BUFFERSIZE 1024
-#define PATH_MAXIMUM 1024
+#define MAX_TTAL_ARGS 1024
 
 /**
- * struct builtin - Has builtin to handle
+ * struct allocation_history - tracks and stores allocations
+ * @mem_ptr: pointer to allocated memory
+ * @next: pointer to next node in list
+ *
+ * Description: stores a pointer to each allocation, allowing
+ * greater organization and more efficient freeing
+ */
+typedef struct allocation_history
+{
+	char *mem_ptr;
+	struct allocation_history *next;
+
+} mem_list;
+
+/**
+ * struct built_ins - Has builtin to handle
  * @command: Pointer to char
  * @fun: function to execute
  */
-
-typedef struct builtin
+typedef struct built_ins
 {
-	char *command;
-	int (*fun)(char **buffer, int err);
-} build_t;
+	char *cmd;
+	int (*fp)(char * const*);
+} built_in;
 
 /****Global variable***/
 extern char **environ;
+extern mem_list *mem_head;
+mem_list *mem_head;
+extern mem_list *static_mem_head;
+mem_list *static_mem_head;
+extern size_t err_msg;
+size_t err_msg;
+
 
 /***** FUNCTIONS FOUND IN FILE buildin.c *****/
-void exit_buildin(char **cmd, char *inputi, char **argv, int k);
-int disen(__attribute__((unused)) char **cmd, __attribute__((unused)) int prt);
-int dir_change(char **cmd, __attribute__((unused))int print);
-int bul_echo(char **cmd, int start);
-int help_display(char **cmd, __attribute__((unused)) int print);
+int cd_Home(void);
+int dir_change(char *const *argv);
+int cd_cur(void);
+int cd_prev(void);
+int parent_cd(void);
 
 
-/***** FUNCTIONS FOUND IN FILE fun_chars.c *****/
-int own_strlen(char *x);
-int own_atoi(char *x);
-int _putchar(char k);
-char *own_strncpy(char *kwenda, char *kbq, int l);
-void _putts(char *kbq);
+/***** FUNCTIONS FOUND IN FILE exit.c *****/
+int is_num(char let);
+int own_atoi(char *status);
+int bltin_exit(char *const *argv);
 
 
 /***** FUNCTIONS FOUND IN FILE getline.c *****/
-char *get_line();
-void hundle_hashtag(char *buffer);
-
-
-/***** FUNCTIONS FOUND IN FILE memory_mngr.c *****/
-void *_kalloc(unsigned int s);
-void *filling_array(void *kim, int num, unsigned int size);
-char *memorycpy(char *dst, char *source, unsigned int k);
-void freeing_all(char **kbq, char *linne);
-void *_reallocc(void *pointer, unsigned int oldersize, unsigned int newersize);
-
-
-/***** FUNCTIONS FOUND IN FILE number_prnt.c *****/
-void numberin_print(int a);
-void num_print(unsigned int j);
-
-
-/***** FUNCTIONS FOUND IN FILE other_char_funs.c *****/
-void rev_arry(char *ar, int length);
-int own_intlen(int number);
-char *own_itoa(unsigned int l);
-int own_isalpha(int f);
-int own_strcmp(char *sizeone, char *sizetwo);
+ssize_t get_line(char **buf);
+void shfting_buffer(char *memory, ssize_t l);
+int allocating_mem(char *memory);
+ssize_t buff_copy(char **dst, char *source, ssize_t *start);
 
 
 /***** FUNCTIONS FOUND IN FILE own_strtoken.c *****/
-unsigned int delim_check(char g, const char *string);
-char *own_strtok(char *string, const char *sep);
+size_t cnt_tokens(char *buffer);
+size_t tok_length(char *buf, size_t tokneed);
+char **own_strtok(char *buffer);
 
 
-/***** FUNCTIONS FOUND IN FILE path_finder.c *****/
-char *_getenv(char *nickname);
-int pathh_cmd(char **input);
-char *building(char *words, char *volum);
+/***** FUNCTIONS FOUND IN FILE path_finder.c ****/
+char **getting_pathh(char *const *argv);
+size_t checking_path(char *const *argv);
+size_t counting_path(char *pat);
+size_t length_path(char *pat_pointer);
+
 
 /***** FUNCTIONS FOUND IN FILE bul_more.c *****/
-int echo_print(char **cmd);
-int disp_hist(__attribute__((unused))char **cm, __attribute__((unused))int s);
+size_t counting_digt(size_t number);
+char *own_itoa(size_t num, char *buff, int ba);
 
 
 /***** FUNCTIONS FOUND IN FILE pet_fun.c *****/
-void printing_error(char *command, int cntr, char **argv);
-void fun_prompt(void);
+char *tar_get(char *var_name);
+int cd_user(char *argv);
+int set_PWD(char *val);
+int set_OLDPWD(void);
+int cd_arg(char *argv);
+
 
 /***** FUNCTIONS FOUND IN FILE shell.c *****/
-int main(__attribute__((unused)) int arg_cnt, char **arg_v);
-void env_create(char **envi);
-int builtin_check(char **cmd);
+void reciev_signal(int sinal __attribute__ ((unused)));
+int main(int argc __attribute__((unused)), char **argv);
+
 
 /***** FUNCTIONS FOUND IN FILE exe.c *****/
-void signal_handle(int sig_n);
-int builtin_handle(char **cmd, int ere);
-int cmd_check(char **cmd, char *buffer, int tc, char **arg_v);
+int exec_mngr(char *const *argv);
+int exe_builtn(char *const *argv);
+int exe_extern(char *const *argv);
 
-/***** FUNCTIONS FOUND IN FILE exe_file.c *****/
-void file_treat(char *buffer, int count, FILE *fp, char **arg_v);
-void file_exit_bul(char **cmd, char *buffer, FILE *fil_d);
-void file_read(char *filename, char **arg_v);
-
-/***** FUNCTIONS FOUND IN FILE hist.c *****/
-void envi_free(char **envi);
-int buf_history(char *buffer);
 
 /***** FUNCTIONS FOUND IN FILE out_put.c *****/
-void print_error(char **arg_v, int cnt, char **cmd);
+int bltin_env(char *const *argv);
+
 
 /***** FUNCTIONS FOUND IN FILE parser.c *****/
-char **cmd_parse(char *buffer);
+char *reverse_string(char *str);
+void freeing_static_memlst(mem_list **head);
 
 
-/***** FUNCTIONS FOUND IN FILE function_more.c  ****/
-char *own_strcpy(char *det, char *sorce);
-char *own_strchr(char *h, char k);
-char *own_strcat(char *det, char *sorce);
-int own_strncmp(const char *a, const char *b, size_t k);
-char *own_strdup(char *string);
+/***** FUNCTIONS FOUND IN FILE function_more.c *****/
+char *own_strncpy(char *destination, const char *source, size_t count);
+size_t own_strlen(char *string);
+int own_strcmp(char *string1, char *string2);
+int own_strncmp(char *string1, char *string2, size_t num);
+char *own_strcat(char *destination, char *source);
 
 
 
