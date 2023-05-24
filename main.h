@@ -76,7 +76,7 @@ void shfting_buffer(char *memory, ssize_t l);
 int allocating_mem(char *memory);
 ssize_t buff_copy(char **dst, char *source, ssize_t *start);
 char *alloc_mngr(char *pointer, size_t siz);
-
+int buffer_check(char *buf);
 
 /***** FUNCTIONS FOUND IN FILE own_strtoken.c *****/
 size_t cnt_tokens(char *buffer);
@@ -114,10 +114,19 @@ int exec_mngr(char *const *argv);
 int exe_builtn(char *const *argv);
 int exe_extern(char *const *argv);
 
+/***** FUNCTIONS FOUND IN FILE memery_strct.c *****/
+char *_settingmem(char *j, char c, unsigned int k);
+char *own_realloc(char *pointer, size_t sizenw);
+void freeing_memlst(mem_list **head);
+mem_list *add_memnode(mem_list **head, char *pointer);
+char *alloc_mngr(char *pointer, size_t siz);
+
+
 
 /***** FUNCTIONS FOUND IN FILE out_put.c *****/
 int bltin_env(char *const *argv);
-
+void printing_error(size_t loop_cnt, char *argv, char **tok_arry);
+char *three_case(char *errcus, char **tok_ary);
 
 /***** FUNCTIONS FOUND IN FILE parser.c *****/
 char *reverse_string(char *str);
