@@ -2,14 +2,14 @@
 #include "main.h"
 
 /**
-  * getline - function that read commds
+  * get_line - function that read commds
   * @buf:- pointer to commands
   * Return:- Always 0
   */
 
 ssize_t get_line(char **buf)
 {
-	static char lin[MAX_TTAL_ ARGS];
+	static char lin[MAX_TTAL_ARGS];
 	static ssize_t sum;
 	ssize_t start = 0;
 	ssize_t copy = 0, cnt = 0;
