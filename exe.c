@@ -17,7 +17,7 @@ int exec_mngr(char *const *argv)
 
 	if (err_msg == 2)
 	{
-		r_var = (exe_extern(argv));
+		r_val = (exe_extern(argv));
 		if (r_val == 0)
 			return (0);
 	}
@@ -42,7 +42,7 @@ int exe_builtn(char *const *argv)
 
 	int j;
 
-	int (*build_in_fp)(char *const *argv);
+	int (*built_in_fp)(char *const *argv);
 
 	for (j = 0; fps[j].cmd; j++)
 		if ((own_strcmp(argv[0], fps[j].cmd)) == 0)
@@ -104,94 +104,4 @@ int exe_extern(char *const *argv)
 	}
 	err_msg = 2;
 	return (-1);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * builtin_handle - For handling builtin commands
- * @ere: stat for last execute
- * @cmd: parsed command
- * Return: 0 success, -1 Fail (Return: Execute builtin)
- */
-int builtin_handle(char **cmd, int ere)/* not in use */
-{
-	build_t bil[] = {
-		{"cd", dir_change},
-		{"env", disen},
-		{"echo", bul_echo},
-		{"help", help_display},
-		{"history", disp_hist},
-		{NULL, NULL}
-	};
-	int j = 0;
-
-	while ((bil + j)->command)
-	{
-		if (own_strcmp(cmd[0], (bil + j)->command) == 0)
-		{
-			return ((bil + j)->fun(cmd, ere));
-		}
-		j++;
-	}
-	return (-1);
-}
-
-/**
- * cmd_check - Execute fork, excute, wait
- * @buffer: the user input
- * @tc: shell execution time case of command not found
- * @cmd: parsed comm
- * @arg_v: argument name
- * Return: 1 case comm Null -1, wrong 0
- */
-int cmd_check(char **cmd, char *buffer, int tc, char **arg_v)
-{
-	pid_t pid;
-	int status;
-
-	if (*cmd == NULL)
-		return (-1);
-
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("Error");
-		return (-1);
-	}
-
-	if (pid == 0)
-	{
-		if (own_strncmp(*cmd, "./", 2) != 0 && own_strncmp(*cmd, "/", 1) != 0)
-		{
-			pathh_cmd(cmd);
-		}
-		if (execve(*cmd, cmd, environ) == -1)
-		{
-			printing_error(cmd[0], tc, arg_v);
-			free(buffer);
-			free(cmd);
-			exit(EXIT_FAILURE);
-		}
-		return (EXIT_SUCCESS);
-	}
-	wait(&status);
-	return (0);
 }

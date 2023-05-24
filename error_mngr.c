@@ -64,8 +64,8 @@ void printing_error(size_t loop_cnt, char *argv, char **tok_arry)
  */
 char *three_case(char *errcus, char **tok_ary)
 {
-	size_t tok1_len = own_strlen(tok_array[0]);
-	size_t tok2_len = own_strlen(tok_array[1]);
+	size_t tok1_len = own_strlen(tok_ary[0]);
+	size_t tok2_len = own_strlen(tok_ary[1]);
 
 	if (tok1_len == 4)
 	{
@@ -81,9 +81,9 @@ char *three_case(char *errcus, char **tok_ary)
 	}
 
 	errcus = alloc_mngr(errcus, sizeof(char) * tok1_len + tok2_len + 5);
-	own_strncpy(errcus, tok_array[0], tok1_len);
+	own_strncpy(errcus, tok_ary[0], tok1_len);
 	own_strcat(errcus, ": '");
-	own_strcat(errcus, tok_array[1]);
+	own_strcat(errcus, tok_ary[1]);
 	own_strcat(errcus, "'");
 
 	errno = ENOENT;

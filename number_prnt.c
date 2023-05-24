@@ -6,7 +6,7 @@
   * @a:- the char to print
   * Return:- Always 0
   */
-
+/*
 void numberin_print(int a)
 {
 	unsigned int p;
@@ -15,7 +15,7 @@ void numberin_print(int a)
 
 	if (a < 0)
 	{
-		_putchar('-');
+		putchar('-');
 		p = -p;
 	}
 
@@ -25,13 +25,13 @@ void numberin_print(int a)
 	}
 
 	_putchar(p % 10 + '0');
-}
+}*/
 
 /**
   * num_print - function that print unsigned char (numbers)
   * @j:- Alway 0
   */
-
+/*
 void num_print(unsigned int j)
 {
 	unsigned int t;
@@ -44,4 +44,4 @@ void num_print(unsigned int j)
 	}
 
 	_putchar(t % 10 + '0');
-}
+}*/

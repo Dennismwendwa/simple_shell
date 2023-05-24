@@ -9,7 +9,7 @@
  * Return: Execute line
  */
 
-void file_treat(char *buffer, int count, FILE *fp, char **arg_v)
+/*void file_treat(char *buffer, int count, FILE *fp, char **arg_v)
 {
 	int str = 0;
 	char **cmd;
@@ -29,7 +29,7 @@ void file_treat(char *buffer, int count, FILE *fp, char **arg_v)
 		str = cmd_check(cmd, buffer, count, arg_v);
 		free(cmd);
 	}
-}
+}*/
 
 /**
  * file_exit_bul - Exit shell case of file
@@ -39,7 +39,7 @@ void file_treat(char *buffer, int count, FILE *fp, char **arg_v)
  * Return: A file line case exit
  */
 
-void file_exit_bul(char **cmd, char *buffer, FILE *fil_d)
+/*void file_exit_bul(char **cmd, char *buffer, FILE *fil_d)
 {
 	int j = 0;
 	int statu;
@@ -63,7 +63,7 @@ void file_exit_bul(char **cmd, char *buffer, FILE *fil_d)
 	free(cmd);
 	fclose(fil_d);
 	exit(statu);
-}
+}*/
 
 /**
  * file_read - Read Command From File
@@ -71,7 +71,7 @@ void file_exit_bul(char **cmd, char *buffer, FILE *fil_d)
  * @arg_v:Program file Name
  * Return: -1 or  0
  */
-
+/*
 void file_read(char *filename, char **arg_v)
 {
 	int count = 0;
@@ -93,4 +93,4 @@ void file_read(char *filename, char **arg_v)
 		free(buffer);
 	fclose(fp);
 	exit(0);
-}
+}*/

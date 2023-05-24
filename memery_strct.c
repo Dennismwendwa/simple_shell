@@ -33,7 +33,7 @@ char *_settingmem(char *j, char c, unsigned int k)
 char *own_realloc(char *pointer, size_t sizenw)
 {
 	size_t j = 0;
-	size_t sizeod = own_strlen(ptr);
+	size_t sizeod = own_strlen(pointer);
 	char *repointer;
 
 	if (sizenw == sizeod)
@@ -51,7 +51,7 @@ char *own_realloc(char *pointer, size_t sizenw)
 		return (pointer);
 	}
 
-	if (ptr)
+	if (pointer)
 	{
 		for (j = 0; j < sizeod && j < sizenw; j++)
 		{
@@ -131,7 +131,7 @@ char *alloc_mngr(char *pointer, size_t siz)
 	if (!(pointer))
 	{
 		perror("hsh");
-		free_memlst(&mem_head);
+		freeing_memlst(&mem_head);
 		return (NULL);
 	}
 
@@ -139,5 +139,3 @@ char *alloc_mngr(char *pointer, size_t siz)
 
 	return (pointer);
 }
-
-
