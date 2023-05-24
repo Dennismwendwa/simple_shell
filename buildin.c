@@ -1,182 +1,161 @@
-
 #include "main.h"
 
 /**
-  * exit_buildin - exits with stat
-  * @inputi:- single user input
-  * @argv:- commands caunt
-  * @k:- number of commands executed
-  * @cmd:- commands to exicute
+  * cd_Home - change home directory
   * Return:- Always 0
   */
-
-void exit_buildin(char **cmd, char *inputi, char **argv, int k)
+int cd_Home(void)
 {
-	int m = 0;
-	int stat;
+	char *dirtag = NULL;
 
-	if (cmd[1] == NULL)
-	{
-		free(inputi);
-		free(cmd);
-		exit(EXIT_SUCCESS);
-	}
+	dirtag = tar_get("HOME=");
 
-	while (cmd[1][m])
+	if (dirtag)
 	{
-		if (own_isalpha(cmd[1][m++]) != 0)
+		if (chdir(dirtag) == 0)
 		{
-			print_error(argv, k, cmd);
-			break;
+			set_OLDPWD();
+			set_PWD(dirtag);
+			return (0);
 		}
 		else
-		{
-			stat = own_atoi(cmd[1]);
-			free(inputi);
-			free(cmd);
-			exit(stat);
-		}
+			return (-1);
 	}
+	return (-1);
 }
-
-/**
-  * disen - shows variables of env
-  * @cmd:- command to exucute
-  * @prt:- command excuted last status
-  * Return:- Always 0
-  */
-
-int disen(__attribute__((unused)) char **cmd, __attribute__((unused)) int prt)
-{
-	int length;
-	size_t l = 0;
-
-	for (; environ[l] != NULL; l++)
-	{
-		length = own_strlen(environ[l]);
-		write(1, environ[l], length);
-		write(STDOUT_FILENO, "\n", 1);
-	}
-
-	return (0);
-}
-
 
 
 /**
   * dir_change - function to change directory
-  * @cmd:- command to excute
-  * @print:- command performed last
+  * @argv:- command to excute
   * Return:- Always 0
   */
-
-
-int dir_change(char **cmd, __attribute__((unused))int print)
+int dir_change(char *const *argv)
 {
-	char cwd[PATH_MAXIMUM];
-	int number = -1;
-
-	if (cmd[1] == NULL)
+	if (argv[1] == NULL || !(own_strcmp(argv[1], "~")))
 	{
-		number = chdir(getenv("HOME"));
-	}
-	else if (own_strcmp(cmd[1], "-") == 0)
-	{
-		number = chdir(getenv("OLDPWD"));
-	}
-	else
-	{
-		number = chdir(cmd[1]);
-	}
-
-
-
-
-	if (number == -1)
-	{
-		perror("hsh");
-		return (-1);
-	}
-	else if (number != -1)
-	{
-		getcwd(cwd, sizeof(cwd));
-		setenv("OLDPWD", getenv("PWD"), 1);
-		setenv("PWD", cwd, 1);
-	}
-
-	return (0);
-}
-
-/**
-  * bul_echo - phundle echo
-  * @cmd:- command to excute
-  * @start:- command status
-  * Return:- Always 0
-  */
-
-int bul_echo(char **cmd, int start)
-{
-	unsigned int pid_num = getppid();
-	char *pathh;
-
-	if (own_strncmp(cmd[1], "$$", 2) == 0)
-	{
-		numberin_print(pid_num);
-		PRINTING("\n");
-	}
-	else if (own_strncmp(cmd[1], "$?", 2) == 0)
-	{
-		num_print(start);
-		PRINTING("\n");
-	}
-	else if (own_strncmp(cmd[1], "$PATH", 5) == 0)
-	{
-		pathh = _getenv("PATH");
-		PRINTING(pathh);
-		PRINTING("\n");
-		free(pathh);
-	}
-	else
-	{
-		return (echo_print(cmd));
-	}
-
-	return (1);
-}
-
-
-/**
-  * help_display - shows hlp for bullin
-  * @print:- status of command exucuted last
-  * @cmd:- command to execute
-  * Return:- Always 0
-  */
-
-int help_display(char **cmd, __attribute__((unused)) int print)
-{
-	char k;
-	int kl;
-	int ky;
-	int red = 1;
-
-	kl = open(cmd[1], O_RDONLY);
-	if (kl < 0)
-	{
-		perror("Error");
-		return (0);
-	}
-
-
-	while (red > 0)
-	{
-		red = read(kl, &k, 1);
-		ky = write(STDOUT_FILENO, &k, red);
-
-		if (ky < 0)
+		if (cd_Home())
 			return (-1);
 	}
+	else if (!(own_strcmp(argv[1], ".")))
+	{
+		if (cd_cur())
+			return (-1);
+	}
+	else if (!(own_strcmp(argv[1], "..")))
+	{
+		if (cd_parent())
+			return (-1);
+	}
+	else if (!(own_strcmp(argv[1], "-")))
+	{
+		if (cd_previous())
+			return (-1);
+	}
+	else if ((!(_strncmp(argv[1], "~", 1)) && (argv[1][1] != '\0')))
+	{
+		if (cd_user(argv[1]))
+			return (-1);
+	}
+	else
+	{
+		if (cd_arg(argv[1]))
+			return (-1);
+	}
+	return (0);
+}
+/**
+ * cd_cur - change home directory
+ * Return: 0 on Success, -1 on Failure
+ */
 
-	_putchar('\n');
+int cd_cur(void)
+{
+	char *dirtag = NULL;
 
+	dirtag = target_get("PWD=");
+
+	if (dirtag)
+	{
+		int chdir_result = chdir(dirtag);
+
+		if (chd_result == 0)
+		{
+			set_OLDPWD();
+			set_PWD(dirtag);
+			return (0);
+		}
+		else
+			return (-1);
+	}
+	return (-1);
+}
+/**
+  * cd_prev - move to previous directory
+ * Return: 0 on Success, 1 on Failure
+ */
+int cd_prev(void)
+{
+	char target_dir[1024];
+	int target_fd;
+	ssize_t bytes_read;
+
+	target_fd = open(".prevdir", O_RDONLY);
+	if (target_fd == -1)
+	{
+		return (1);
+	}
+
+	bytes_read = read(target_fd, target_dir, sizeof(target_dir) - 1);
+	if (bytes_read == -1)
+	{
+		close(target_fd);
+		return (1);
+	}
+
+	target_dir[bytes_read] = '\0';
+	if (chdir(target_dir) == 0)
+	{
+		set_OLDPWD();
+		set_PWD(target_dir);
+		write(STDOUT_FILENO, target_dir, own_strlen(target_dir));
+		write(STDOUT_FILENO, "\n", 1);
+		close(target_fd);
+		return (0);
+	}
+	else
+	{
+		close(target_fd);
+		return (1);
+	}
+}
+
+/**
+ * parent_cd - move to parent directory
+ * Return: 0 on Success, 1 on Failure
+ */
+int parent_cd(void)
+{
+	char dirtar[1024];
+	char *l_slash;
+	size_t i;
+
+	dirtar = target_get("PWD=");
+	if (dirtar)
+	{
+		l_slash = strrchr(dirtar, '/');
+		if (l_slash)
+		{
+			for (i = strlen(dirtar); &dirtar[i] != l_slash; i--)
+				dirtar[i];
+
+			if (chdir(dirtar) == 0)
+			{
+				set_OLDPWD();
+				set_PWD(target_dir);
+				return (0);
+			}
+		}
+	}
 	return (0);
 }

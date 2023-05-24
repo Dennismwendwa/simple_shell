@@ -1,77 +1,101 @@
 
 #include "main.h"
 
-/**
-  * delim_check - function to check the delimiter to use
-  * @g:- the char to check
-  * @string:- the string we will be checking
-  * Return:- Always 0
-  */
-
-
-unsigned int delim_check(char g, const char *string)
-{
-	unsigned int l = 0;
-
-	for (; string[l] != '\0'; l++)
-	{
-		if (g == string[l])
-		{
-			return (1);
-		}
-	}
-
-	return (0);
-}
-
+size_t cnt_tokens(char *buffer);
+size_t tok_length(char *buf, size_t tokneed);
 
 /**
   * own_strtok - function tokezes str
-  * @string:- str to tokeniz
-  * @sep:- delimiter to use
+  * @buffer:- str to tokens
   * Return:- Always 0
   */
 
-char *own_strtok(char *string, const char *sep)
+char **own_strtok(char *buffer)
 {
-	unsigned int k;
-	static char *numbr, *tip;
+	size_t tokamnt;
+	size_t allocsize;
+	size_t toklen = 0, tokcurr = 1;
+	size_t lineit = 0, tokit = 0, i = 0;
+	char **tok_array = NULL;
 
-	if (string != NULL)
-	{
-		numbr = string;
-	}
-	tip = numbr;
+	tokamnt = cnt_tokens(line);
+	if (tokamnt == 0)
+		return (NULL);
 
-	if (tip == NULL)
+	allocsize = (tokamnt + 1) * (sizeof(char *));
+	tok_array = (char **)alloc_mngr((char *)tok_array, allocsize);
+	if (tok_array == NULL)
 		return (NULL);
-	for (k = 0; tip[k] != '\0'; k++)
+
+	for (i = 0; tokcurr <= tokamnt; tokcurr++, i++)
 	{
-		if (delim_check(tip[k], sep) == 0)
-			break;
+		toklen = tok_length(buffer, tokcurr);
+
+		allocsize = (toklen + 1) * (sizeof(char));
+		tok_array[i] = alloc_mngr(tok_array[i], allocsize);
+		if (tok_array[i] == NULL)
+			return (NULL);
+
+		while (buffer[lineit] == ' ' || buffer[lineit] == '\t')
+			lineit++;
+
+		for (tokit = 0; tokit < toklen; tokit++, lineit++)
+			tok_array[i][tokit] = buffer[lineit];
+
+		tok_array[i][tok_it] = '\0';
 	}
-	if (numbr[k] == '\0' || numbr[k] == '#')
+
+	tok_array[i] = NULL;
+
+	return (tok_array);
+}
+
+/**
+ * cnt_tokens - Counts the amount of tokens
+ * @buf: The string to count how many tokens it has
+ *
+ * Return: Always the total amount of tokens
+ */
+size_t cnt_tokens(char *buf)
+{
+	size_t it = 0, tokamnt = 0;
+
+	while (buf[it] != '\0')
 	{
-		numbr = NULL;
-		return (NULL);
+		if ((buf[it + 1] == ' ' || buf[it + 1] == '\t') || buf[it + 1] == '\0')
+			if (buf[it] != ' ' && buf[it] != '\t')
+				tokamnt++;
+		it++;
 	}
-	tip = numbr + 1;
-	numbr = tip;
-	for (k = 0; numbr[k] != '\0'; k++)
+	return (tokamnt);
+}
+
+/**
+ * tok_length - Count how long a specified token is
+ * @buf: The string containing the token
+ * @tokneed: Specifys which token within line is needed
+ *
+ * Return: Always the length of the specified token
+ */
+size_t tok_length(char *buf, size_t tokneed)
+{
+	size_t it = 0, toklen = 0, tokcurr = 0;
+
+	while (tokcurr < tokneed)
 	{
-		if (delim_check(numbr[k], sep) == 1)
-			break;
-	}
-	if (numbr[k] == '\0')
-		numbr = NULL;
-	else
-	{
-		numbr[k] = '\0';
-		numbr = numbr + k + 1;
-		if (*numbr == '\0')
+		while (buf[it] == ' ' || buf[it] == '\t')
+			it++;
+
+		if (buf[it] != '\0' && buf[it] != ' ' && buf[it] != '\t')
 		{
-			numbr = NULL;
+			tokcurr++;
+			while (buf[it] != '\0' && buf[it] != ' ' && buf[it] != '\t')
+			{
+				if (tokcurr == tokneed)
+					toklen++;
+				it++;
+			}
 		}
 	}
-	return (tip);
+	return (toklen);
 }
