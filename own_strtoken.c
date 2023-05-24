@@ -18,7 +18,7 @@ char **own_strtok(char *buffer)
 	size_t lineit = 0, tokit = 0, i = 0;
 	char **tok_array = NULL;
 
-	tokamnt = cnt_tokens(line);
+	tokamnt = cnt_tokens(buffer);
 	if (tokamnt == 0)
 		return (NULL);
 
@@ -42,7 +42,7 @@ char **own_strtok(char *buffer)
 		for (tokit = 0; tokit < toklen; tokit++, lineit++)
 			tok_array[i][tokit] = buffer[lineit];
 
-		tok_array[i][tok_it] = '\0';
+		tok_array[i][tokit] = '\0';
 	}
 
 	tok_array[i] = NULL;
