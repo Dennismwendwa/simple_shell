@@ -96,38 +96,24 @@ int cd_cur(void)
  */
 int cd_prev(void)
 {
-	char target_dir[1024];
-	int target_fd;
-	ssize_t bytes_read;
+	char *tar_dir = NULL;
+	
+	tar_dir = tar_get("OLDPWD=");
+	if (tar_dir)
+	{
+		if (chdir(tar_dir) == 0)
+		{
+			set_OLDPWD();
+			set_PWD(tar_dir);
+			write(STDOUT_FILENO, tar_dir, own_strlen(tar_dir));
+			write(STDOUT_FILENO, "\n", 1);
+			return (0);
+		}
+		else
+			return (-1);
+	}
+	return (-1);
 
-	target_fd = open(".prevdir", O_RDONLY);
-	if (target_fd == -1)
-	{
-		return (1);
-	}
-
-	bytes_read = read(target_fd, target_dir, sizeof(target_dir) - 1);
-	if (bytes_read == -1)
-	{
-		close(target_fd);
-		return (1);
-	}
-
-	target_dir[bytes_read] = '\0';
-	if (chdir(target_dir) == 0)
-	{
-		set_OLDPWD();
-		set_PWD(target_dir);
-		write(STDOUT_FILENO, target_dir, own_strlen(target_dir));
-		write(STDOUT_FILENO, "\n", 1);
-		close(target_fd);
-		return (0);
-	}
-	else
-	{
-		close(target_fd);
-		return (1);
-	}
 }
 
 /**
@@ -137,25 +123,23 @@ int cd_prev(void)
 int parent_cd(void)
 {
 	char *dirtar = NULL;
-	char *l_slash;
 	size_t i;
 
 	dirtar = tar_get("PWD=");
 	if (dirtar)
 	{
-		l_slash = strrchr(dirtar, '/');
-		if (l_slash)
-		{
-			for (i = strlen(dirtar); &dirtar[i] != l_slash; i--)
-				dirtar[i] = '\0';
+		for (i = own_strlen(dirtar); dirtar[i] != '/';)
+				i--;
 
-			if (chdir(dirtar) == 0)
-			{
-				set_OLDPWD();
-				set_PWD(dirtar);
-				return (0);
-			}
+		for (; dirtar[i]; i++)
+			dirtar[i] = '\0';
+
+		if (chdir(dirtar) == 0)
+		{
+			set_OLDPWD();
+			set_PWD(dirtar);
+			return (0);
 		}
 	}
-	return (0);
+	return (-1);
 }
