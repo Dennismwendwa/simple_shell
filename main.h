@@ -35,8 +35,8 @@ typedef struct allocation_history
 
 /**
  * struct built_ins - Has builtin to handle
- * @command: Pointer to char
- * @fun: function to execute
+ * @cmd: Pointer to char
+ * @fp: function to execute
  */
 typedef struct built_ins
 {

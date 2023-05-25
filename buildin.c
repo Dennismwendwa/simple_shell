@@ -97,7 +97,7 @@ int cd_cur(void)
 int cd_prev(void)
 {
 	char *tar_dir = NULL;
-	
+
 	tar_dir = tar_get("OLDPWD=");
 	if (tar_dir)
 	{
@@ -129,7 +129,7 @@ int parent_cd(void)
 	if (dirtar)
 	{
 		for (i = own_strlen(dirtar); dirtar[i] != '/';)
-				i--;
+			i--;
 
 		for (; dirtar[i]; i++)
 			dirtar[i] = '\0';
