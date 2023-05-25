@@ -11,24 +11,24 @@
 
 char *own_strncpy(char *destination, const char *source, size_t count)
 {
-	size_t index = 0;
+	size_t j = 0;
 
-	while (index < count)
+	while (j < count)
 	{
-		if (source[index] == '\0')
+		if (source[j] == '\0')
 		{
 			break;
 		}
-		destination[index] = source[index];
-		index++;
+		destination[j] = source[j];
+		j++;
 	}
 
-	destination[index] = '\0';
+	destination[j] = '\0';
 
-	while (index < count)
+	while (j < count)
 	{
-		destination[index] = '\0';
-		index++;
+		destination[j] = '\0';
+		j++;
 	}
 
 	return (destination);
@@ -64,33 +64,30 @@ size_t own_strlen(char *string)
 
 int own_strcmp(char *string1, char *string2)
 {
-	int index = 0;
+	int j = 0;
 
 
-	while (string1[index] != '\0')
+	while (string1[j] != '\0')
 	{
-		if (string1[index] < string2[index])
+		if (string1[j] < string2[j])
 		{
-			return (string1[index] - string2[index]);
+			return (string1[j] - string2[j]);
 		}
 
-		if (string1[index] > string2[index])
+		if (string1[j] > string2[j])
 		{
-			return (string1[index] - string2[index]);
+			return (string1[j] - string2[j]);
 		}
-		index++;
+		j++;
 	}
 
-	if (string2[index] != '\0')
+	if (string2[j] != '\0')
 	{
-		return (string1[index] - string2[index]);
+		return (string1[j] - string2[j]);
 	}
 
 	return (0);
 }
-
-
-
 
 
 /**
@@ -119,11 +116,11 @@ int own_strncmp(char *string1, char *string2, size_t num)
 
 	k++;
 	}
-if (k < num && string2[k] != '\0')
-{
-	return (string1[k] - string2[k]);
-}
-return (0);
+	if (k < num && string2[k] != '\0')
+	{
+		return (string1[k] - string2[k]);
+	}
+	return (0);
 }
 
 
@@ -157,12 +154,3 @@ char *own_strcat(char *destination, char *source)
 	destination[destination_index] = '\0';
 	return (destination);
 }
-
-
-
-
-
-
-
-
-

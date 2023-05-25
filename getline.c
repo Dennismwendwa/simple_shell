@@ -1,6 +1,8 @@
 #include "main.h"
 
-
+int buffer_check(char *buf);
+void shfting_buffer(char *memory, ssize_t l);
+ssize_t buff_copy(char **dst, char *source, ssize_t *start);
 
 /**
   * get_line - function that read commds
@@ -15,9 +17,9 @@ ssize_t get_line(char **buf)
 	ssize_t start = 0;
 	ssize_t copy = 0, cnt = 0;
 
-	if ((allocating_mem(lin)) == 0)
+	if ((buffer_check(lin)) == 0)
 	{
-		while ((cnt = read(STDIN_FILENO, lin, MAX_TTAL_ARGS - 1)) > 0)
+		while ((cnt = read(STDIN_FILENO, lin, (MAX_TTAL_ARGS - 1))) > 0)
 		{
 			if (cnt == -1)
 				return (-1);
@@ -31,6 +33,7 @@ ssize_t get_line(char **buf)
 				return (sum);
 			}
 		}
+		sum = 0;
 	}
 
 	else
@@ -69,7 +72,7 @@ void shfting_buffer(char *memory, ssize_t l)
 
 	while (memory[l] != '\0')
 	{
-		memory[f] = memory[f];
+		memory[f] = memory[l];
 		f++;
 		l++;
 	}
@@ -127,9 +130,9 @@ ssize_t buff_copy(char **dst, char *source, ssize_t *start)
 
 	if (source[k] == '\0')
 	{
-		*dst = alloc_mngr(*dst, (sizeof(char) * (cnt_copy)));
+		*dst = alloc_mngr(*dst, (sizeof(char) * (cnt_copy + *start + 1)));
 		if (!(*dst))
-			return (1);
+			return (-1);
 		own_strncpy((*dst + *start), source, (cnt_copy));
 		*start = *start + cnt_copy;
 		return (cnt_copy);

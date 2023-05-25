@@ -1,5 +1,7 @@
 #include "main.h"
 
+void reciev_signal(int sinal);
+
 /**
   * reciev_signal - writes promt
   * @sinal:- attribute

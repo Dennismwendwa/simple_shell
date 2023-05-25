@@ -53,18 +53,18 @@ char **getting_pathh(char *const *argv)
 size_t checking_path(char *const *argv)
 {
 	size_t j = 0;
-	size_t path_t = 0;
+	size_t path_i = 0;
 
 	while (argv[0][j])
 	{
 		if (argv[0][j] == '/')
 		{
-			path_t = 1;
+			path_i = 1;
 			break;
 		}
 		j++;
 	}
-	return (path_t);
+	return (path_i);
 }
 
 /**
