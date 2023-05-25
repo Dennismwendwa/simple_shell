@@ -2,8 +2,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "main.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -65,22 +63,22 @@ int parent_cd(void);
 
 
 /***** FUNCTIONS FOUND IN FILE exit.c *****/
-int is_num(char let);
-int own_atoi(char *status);
+/*int is_num(char let);*/
+/*int own_atoi(char *status);*/
 int bltin_exit(char *const *argv);
 
 
 /***** FUNCTIONS FOUND IN FILE getline.c *****/
 ssize_t get_line(char **buf);
-void shfting_buffer(char *memory, ssize_t l);
+/*void shfting_buffer(char *memory, ssize_t l);*/
 int allocating_mem(char *memory);
-ssize_t buff_copy(char **dst, char *source, ssize_t *start);
+/*ssize_t buff_copy(char **dst, char *source, ssize_t *start);*/
 char *alloc_mngr(char *pointer, size_t siz);
 int buffer_check(char *buf);
 
 /***** FUNCTIONS FOUND IN FILE own_strtoken.c *****/
-size_t cnt_tokens(char *buffer);
-size_t tok_length(char *buf, size_t tokneed);
+/*size_t cnt_tokens(char *buffer);*/
+/*size_t tok_length(char *buf, size_t tokneed);*/
 char **own_strtok(char *buffer);
 
 
@@ -106,7 +104,6 @@ int cd_arg(char *argv);
 
 /***** FUNCTIONS FOUND IN FILE shell.c *****/
 void reciev_signal(int sinal __attribute__ ((unused)));
-int main(int argc __attribute__((unused)), char **argv);
 
 
 /***** FUNCTIONS FOUND IN FILE exe.c *****/
@@ -126,7 +123,7 @@ char *alloc_mngr(char *pointer, size_t siz);
 /***** FUNCTIONS FOUND IN FILE out_put.c *****/
 int bltin_env(char *const *argv);
 void printing_error(size_t loop_cnt, char *argv, char **tok_arry);
-char *three_case(char *errcus, char **tok_ary);
+/*char *three_case(char *errcus, char **tok_ary);*/
 
 /***** FUNCTIONS FOUND IN FILE parser.c *****/
 char *reverse_string(char *str);
