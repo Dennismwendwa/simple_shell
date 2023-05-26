@@ -168,4 +168,16 @@ int own_strncmp(char *string1, char *string2, size_t num);
 char *own_strcat(char *destination, char *source);
 
 
+/***** FUNCTION FOUND IN FILE alias.c ****/
+void freeing_args(char **args, char **bck);
+char **replacing_alias(char **args);
+
+/***** FUNCTIONS FOUND IN FILE link_list.c *****/
+void list_free(list_t *head);
+void freeing_alias_ls(_aliast *head);
+list_t *node_add_end(list_t **hd, char *dir);
+_aliast *alias_add_end(_aliast **head, char *name, char *value);
+
+
+
 #endif

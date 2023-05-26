@@ -166,7 +166,8 @@ int byshell_alis(char **args, char __attribute__((__unused__)) **back)
 				pmt = pmt->next;
 			}
 			if (!pmt)
-				let = creating_error(args + j, 1);
+				/*let = creating_error(args + j, 1);*/
+				return (1);
 		}
 		else
 			setting_alias(args[j], vlue);
@@ -193,6 +194,3 @@ void freeing_args(char **args, char **bck)
 	free(bck);
 
 }
-
-
-
