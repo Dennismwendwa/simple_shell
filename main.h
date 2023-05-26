@@ -19,6 +19,36 @@
 #define MAX_TTAL_ARGS 1024
 
 /**
+ * struct list_s - A new struct type defining a linked list.
+ * @dir: A directory path.
+ * @next: A pointer to another struct list_s.
+ */
+typedef struct list_s
+{
+	char *dir;
+	struct list_s *next;
+} list_t;
+
+/**
+ * struct alias_s - A new struct defining aliases.
+ * @name: The name of the alias.
+ * @value: The value of the alias.
+ * @next: A pointer to another struct alias_s.
+ */
+typedef struct alias_s
+{
+	char *name;
+	char *value;
+	struct alias_s *next;
+} _aliast;
+
+/* Global aliases linked list */
+alias_t *aliases
+
+/* Global program name */
+char *name;
+
+/**
  * struct allocation_history - tracks and stores allocations
  * @mem_ptr: pointer to allocated memory
  * @next: pointer to next node in list
